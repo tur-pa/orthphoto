@@ -1,7 +1,9 @@
+import Gallery from "../ui/Gallery";
+
 function Homepage() {
   return (
     <div>
-      <p>Hello world!</p>
+      <Gallery></Gallery>
     </div>
   );
 }
