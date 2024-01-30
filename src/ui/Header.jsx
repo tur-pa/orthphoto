@@ -1,4 +1,3 @@
-import BackgroundImage from "./BackgroundImage";
 import Navigation from "./Navigation";
 
 function Header() {

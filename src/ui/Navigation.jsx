@@ -4,10 +4,10 @@ import Menu from "./Menu";
 function Navigation() {
   return (
     <div className="flex justify-between text-white h-20 items-center">
-      <div>
+      <div className="basis-full">
         <Logo></Logo>
       </div>
-      <div>
+      <div className="basis-full">
         <Menu></Menu>
       </div>
     </div>

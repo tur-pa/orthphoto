@@ -2,7 +2,7 @@ import { FaList } from "react-icons/fa6";
 
 function Menu() {
   return (
-    <div className="flex gap-x-5">
+    <div className="flex gap-x-5 font-medium">
       <button>Przeglądaj</button>
       <button>Prześlij zdjęcie</button>
       <button>
