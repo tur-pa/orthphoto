@@ -1,5 +1,10 @@
 import Gallery from "./Gallery";
-import { FaList, FaMagnifyingGlass } from "react-icons/fa6";
+import {
+  FaList,
+  FaMagnifyingGlass,
+  FaFacebookF,
+  FaInstagram,
+} from "react-icons/fa6";
 
 function AppLayout() {
   return (
@@ -14,17 +19,20 @@ function AppLayout() {
             </div>
             {/* NAVBAR */}
             <nav className="font-semibold flex justify-between gap-4 self-center">
-              <a>Przeglądaj</a>
-              <a>Prześlij zdjęcie</a>
-              <a>
+              <a href="/">Przeglądaj</a>
+              <a href="/">Prześlij zdjęcie</a>
+              <a href="/" className="inline-flex items-center">
                 <FaList></FaList>
               </a>
-              <a>Dołącz</a>
+              <a href="/">Dołącz</a>
             </nav>
           </div>
 
           {/* SEARCH */}
-          <div className="flex justify-center items-center w-full max-w-[630px] h-[50vh] absolute top-0">
+          <div
+            id="search"
+            className="flex justify-center items-center w-full max-w-[630px] h-[50vh] absolute top-0"
+          >
             <div className="basis-3/6">
               <h1 className="font-semibold text-2xl">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -57,8 +65,147 @@ function AppLayout() {
           className="bg-cover bg-center bg-no-repeat min-h-[50vh] w-screen brightness-75 absolute top-0 -z-10"
         ></div>
       </section>
-
+      <div className="flex justify-between container mx-auto my-9">
+        <h2 className="font-semibold text-2xl">Najnowsze zdjęcia w serwisie</h2>
+        <select className="font-medium text-lg inline-flex items-center justify-center border rounded-lg border-gray-300 p-2.5 cursor-pointer focus:border-gray-500">
+          <option selected>Nowe</option>
+          <option>Najwyżej oceniane</option>
+          <option>Komentowane</option>
+        </select>
+      </div>
       <Gallery></Gallery>
+      <div className="container mx-auto flex justify-around">
+        <button className="appearance-none font-medium border border-gray-300 cursor-pointer hover:border-gray-500 focus:border-gray-500 rounded-lg p-2.5 mt-10 transition-all duration-500">
+          Załaduj więcej
+        </button>
+      </div>
+
+      {/* Footer */}
+      <footer>
+        <div className="w-full px-4 container mx-auto py-8">
+          <div className="flex justify-between">
+            <a href="/">
+              <span className="text-2xl font-semibold whitespace-nowrap">
+                Orthphoto
+              </span>
+            </a>
+
+            <div className="grid grid-cols-3 gap-8">
+              <div>
+                <h2 className="mb-6 text-sm font-semibold text-gray-800 uppercase">
+                  Zdjęcia
+                </h2>
+                <ul className="text-gray-500 font-medium [&>*:not(:last-child)]:mb-4">
+                  <li>
+                    <a
+                      href="/"
+                      className="hover:text-gray-900 transition-all duration-300"
+                    >
+                      Przeglądaj
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#search"
+                      className="hover:text-gray-900 transition-all duration-300"
+                    >
+                      Wyszukaj
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                  Społeczność
+                </h2>
+                <ul className="text-gray-500 font-medium [&>*:not(:last-child)]:mb-4">
+                  <li>
+                    <a
+                      href="/"
+                      className="hover:text-gray-900 transition-all duration-300"
+                    >
+                      Zaloguj się
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="hover:text-gray-900 transition-all duration-300"
+                    >
+                      Dołącz
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="hover:text-gray-900 transition-all duration-300"
+                    >
+                      Autorzy
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                  Orthphoto
+                </h2>
+                <ul className="text-gray-500 font-medium [&>*:not(:last-child)]:mb-4">
+                  <li>
+                    <a
+                      href="/"
+                      className="hover:text-gray-900 transition-all duration-300"
+                    >
+                      O nas
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="hover:text-gray-900 transition-all duration-300"
+                    >
+                      Wsparcie
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="hover:text-gray-900 transition-all duration-300"
+                    >
+                      Kontakt
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <hr className="my-8 border-gray-200"></hr>
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-gray-500 text-center">
+              © 2024&nbsp;
+              <a href="https://orthphoto.net/" class="hover:text-gray-700">
+                Orthphoto
+              </a>
+              . All Rights Reserved.
+            </span>
+            <div className="flex">
+              <a
+                href="/"
+                className="text-gray-500 hover:text-gray-600 ransition-all duration-300 mx-2"
+              >
+                <FaFacebookF />
+                <span class="sr-only">Facebook page</span>
+              </a>
+              <a href="/">
+                <FaInstagram className="text-gray-500 hover:text-gray-600 ransition-all duration-200 mx-2" />
+                <span class="sr-only">Instagram page</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
