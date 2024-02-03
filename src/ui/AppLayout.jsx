@@ -1,10 +1,7 @@
 import Gallery from "./Gallery";
-import {
-  FaList,
-  FaMagnifyingGlass,
-  FaFacebookF,
-  FaInstagram,
-} from "react-icons/fa6";
+import { FaMagnifyingGlass, FaFacebookF, FaInstagram } from "react-icons/fa6";
+import MenuButton from "./MenuButton";
+import Button from "./Button";
 
 function AppLayout() {
   return (
@@ -19,11 +16,12 @@ function AppLayout() {
             </div>
             {/* NAVBAR */}
             <nav className="font-semibold flex justify-between gap-4 self-center">
-              <a href="/">Przeglądaj</a>
+              <a href="/discover">Przeglądaj</a>
               <a href="/">Prześlij zdjęcie</a>
-              <a href="/" className="inline-flex items-center">
+              <MenuButton></MenuButton>
+              {/* <a href="/" className="inline-flex items-center">
                 <FaList></FaList>
-              </a>
+              </a> */}
               <a href="/">Dołącz</a>
             </nav>
           </div>
@@ -40,7 +38,7 @@ function AppLayout() {
 
               <form>
                 <div className="flex mt-4">
-                  <select className="items-center py-2.5 px-1 text-sm font-medium text-center text-gray-900 bg-gray-50 border border-gray-300 rounded-s-lg">
+                  <select className="py-2.5 px-1 text-sm font-medium text-center text-gray-900 bg-gray-50 border border-gray-300 rounded-s-lg">
                     <option selected className="">
                       Odkrywaj
                     </option>
@@ -74,10 +72,8 @@ function AppLayout() {
         </select>
       </div>
       <Gallery></Gallery>
-      <div className="container mx-auto flex justify-around">
-        <button className="appearance-none font-medium border border-gray-300 cursor-pointer hover:border-gray-500 focus:border-gray-500 rounded-lg p-2.5 mt-10 transition-all duration-500">
-          Załaduj więcej
-        </button>
+      <div className="container mx-auto flex justify-around my-10">
+        <Button>Załaduj więcej</Button>
       </div>
 
       {/* Footer */}
@@ -181,7 +177,7 @@ function AppLayout() {
             </div>
           </div>
 
-          <hr className="my-8 border-gray-200"></hr>
+          <hr className="my-8 border-gray-300"></hr>
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-500 text-center">
               © 2024&nbsp;

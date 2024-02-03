@@ -5,6 +5,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
+import Discoverpage from "./pages/Discoverpage";
+import Userpage from "./pages/Userpage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,11 +23,13 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false}> */}
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout></AppLayout>}>
-            <Route index element={<Navigate replace to="/"></Navigate>}></Route>
-            <Route path="/" element={<Homepage></Homepage>}></Route>
-            <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
-          </Route>
+          <Route index element={<AppLayout></AppLayout>}></Route>
+          <Route
+            path="discover"
+            element={<Discoverpage></Discoverpage>}
+          ></Route>
+          <Route path="user" element={<Userpage></Userpage>}></Route>
+          <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
         </Routes>
       </BrowserRouter>
       {/* </ReactQueryDevtools>
