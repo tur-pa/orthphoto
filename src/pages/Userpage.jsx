@@ -5,6 +5,10 @@ import Input from "../ui/Input";
 import FileInput from "../ui/FileInput";
 import { useState } from "react";
 import Header from "../ui/Header";
+import { FaPencil, FaPlus } from "react-icons/fa6";
+import Filter from "../ui/Filter";
+import Sort from "../ui/Sort";
+import Gallery from "../ui/Gallery";
 
 function Userpage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,8 +18,11 @@ function Userpage() {
 
   return (
     <>
+      {/* HEADER */}
       <Header></Header>
-      <div className="flex flex-col justify-center items-center">
+
+      {/* USER SECTION */}
+      <section className="flex flex-col justify-center items-center">
         <img
           className={avatarClass}
           src="https://images.pexels.com/photos/19402529/pexels-photo-19402529/free-photo-of-verde-atras-do-verde.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -23,13 +30,54 @@ function Userpage() {
         ></img>
 
         <h1 className={usernameClass}>Nazwa użytkownika</h1>
-        <div className="">
-          <Button type="bgButton">Edytuj profil</Button>
+        <div>
+          <Button type="bgButton">
+            <FaPencil /> &nbsp; Edytuj profil
+          </Button>
           <Button onClick={() => setIsOpen((isOpen) => !isOpen)}>
-            Dodaj nowe zdjęcie
+            <FaPlus /> &nbsp; Dodaj nowe zdjęcie
           </Button>
         </div>
-      </div>
+
+        <div className="flex text-center [&>div>p]:text-gray-400 [&>div>h4]:text-lg [&>div>h4]:font-medium [&>div>h4]:text-gray-500">
+          <div className="mr-4">
+            <p>Wyświetlenia</p>
+            <h4>324,5 tysięcy</h4>
+          </div>
+          <div className="mx-2">
+            <p>Polubienia</p>
+            <h4>324,5 tysięcy</h4>
+          </div>
+          <div className="ml-4">
+            <p>Liczba zdjęć</p>
+            <h4>324,5 tysięcy</h4>
+          </div>
+        </div>
+      </section>
+
+      {/* FILTER SECTION */}
+      <section>
+        <div className="container mx-auto mt-5 flex justify-end">
+          <div>
+            <Filter
+              options={[
+                { value: "all", label: "Wszystkie" },
+                { value: "popularity", label: "Popularne" },
+                { value: "commented", label: "Komentowane" },
+              ]}
+            ></Filter>
+          </div>
+          <div className="flex items-center">
+            <Sort></Sort>
+          </div>
+        </div>
+      </section>
+      {/* GALLERY SECTION */}
+      <section className="mt-8">
+        <Gallery></Gallery>
+      </section>
+
+      {/* ADD PHOTO SECTION */}
       <div>
         {isOpen && (
           <Form>
@@ -48,6 +96,8 @@ function Userpage() {
           </Form>
         )}
       </div>
+
+      {/* FOOTER */}
     </>
   );
 }
