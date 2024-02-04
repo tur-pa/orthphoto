@@ -3,16 +3,14 @@ import FormRow from "../ui/FormRow";
 import Form from "../ui/Form";
 import Input from "../ui/Input";
 import FileInput from "../ui/FileInput";
-import { useState } from "react";
 import Header from "../ui/Header";
 import { FaPencil, FaPlus } from "react-icons/fa6";
 import Filter from "../ui/Filter";
 import Sort from "../ui/Sort";
 import Gallery from "../ui/Gallery";
+import AddPhoto from "../features/photos/AddPhoto";
 
 function Userpage() {
-  const [isOpen, setIsOpen] = useState(false);
-
   const avatarClass = `w-[130px] h-[130px] rounded-full object-cover`;
   const usernameClass = `text-2xl font-medium mt-7`;
 
@@ -34,9 +32,7 @@ function Userpage() {
           <Button type="bgButton">
             <FaPencil /> &nbsp; Edytuj profil
           </Button>
-          <Button onClick={() => setIsOpen((isOpen) => !isOpen)}>
-            <FaPlus /> &nbsp; Dodaj nowe zdjęcie
-          </Button>
+          <AddPhoto></AddPhoto>
         </div>
 
         <div className="flex text-center [&>div>p]:text-gray-400 [&>div>h4]:text-lg [&>div>h4]:font-medium [&>div>h4]:text-gray-500">
@@ -78,24 +74,6 @@ function Userpage() {
       </section>
 
       {/* ADD PHOTO SECTION */}
-      <div>
-        {isOpen && (
-          <Form>
-            <FormRow label="Nazwa zdjęcia">
-              <Input type="text" id="photoName"></Input>
-            </FormRow>
-
-            <FormRow label="Zdjęcie">
-              <FileInput id="image" accept="image/*"></FileInput>
-            </FormRow>
-
-            <FormRow>
-              <Button>Zamknij</Button>
-              <Button>Dodaj zdjęcie</Button>
-            </FormRow>
-          </Form>
-        )}
-      </div>
 
       {/* FOOTER */}
     </>
