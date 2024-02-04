@@ -1,5 +1,9 @@
 function Logo() {
-  return <img src="/op-wide.png" alt="Orthphoto logo" />;
+  return (
+    <div>
+      <img src="/op-wide.png" alt="Orthphoto logo" />
+    </div>
+  );
 }
 
 export default Logo;

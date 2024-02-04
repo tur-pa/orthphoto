@@ -1,14 +1,14 @@
-import { FaList } from "react-icons/fa6";
+import MenuButton from "./MenuButton";
+
+const styledNav = `flex justify-between gap-4 self-center font-semibold text-nowrap`;
 
 function Menu() {
   return (
-    <div className="flex gap-x-5 font-medium">
-      <button>Przeglądaj</button>
-      <button>Prześlij zdjęcie</button>
-      <button>
-        <FaList></FaList>
-      </button>
-      <button>Dołącz</button>
+    <div className={styledNav}>
+      <a href="/discover">Przeglądaj</a>
+      <a href="/">Prześlij zdjęcie</a>
+      <MenuButton></MenuButton>
+      <a href="/">Dołącz</a>
     </div>
   );
 }

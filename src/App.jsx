@@ -2,11 +2,11 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import Homepage from "./pages/Homepage";
+import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
+import Discover from "./pages/Discover";
+import User from "./pages/User";
 import AppLayout from "./ui/AppLayout";
-import Discoverpage from "./pages/Discoverpage";
-import Userpage from "./pages/Userpage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,12 +23,11 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false}> */}
       <BrowserRouter>
         <Routes>
-          <Route index element={<AppLayout></AppLayout>}></Route>
-          <Route
-            path="discover"
-            element={<Discoverpage></Discoverpage>}
-          ></Route>
-          <Route path="user" element={<Userpage></Userpage>}></Route>
+          <Route index element={<Home></Home>}></Route>
+          <Route element={<AppLayout></AppLayout>}>
+            <Route path="discover" element={<Discover></Discover>}></Route>
+            <Route path="user" element={<User></User>}></Route>
+          </Route>
           <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
         </Routes>
       </BrowserRouter>
