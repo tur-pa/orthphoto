@@ -13,7 +13,7 @@ function SearchForm({ type = "marginY" }) {
   return (
     <form className={styles[type]}>
       <select className={styledSelect}>
-        <option selected>Odkrywaj</option>
+        <option defaultValue="discover">Odkrywaj</option>
         <option>Autor</option>
       </select>
       <input

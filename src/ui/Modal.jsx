@@ -1,18 +1,11 @@
-import {
-  cloneElement,
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { FaPlus } from "react-icons/fa6";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 
-const styledModal = `fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-lg shadow-lg py-12 px-14 transition-all`;
+const styledModal = `fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg py-12 px-14 transition-all`;
 const overlay = `fixed top-0 left-0 w-full h-screen bg-gray-200/[0.5] backdrop-blur-sm z-[1000] transition-all`;
-const closeButton = `apperance-none p-2 rounded-sm translate-x-3 transition-all absolute top-5 right-7 hover:bg-gray-400`;
+const closeButton = `apperance-none p-2 rounded-sm translate-x-3 rotate-45 transition-all absolute top-5 right-7 text-gray-600 hover:text-gray-800`;
 
 const ModalContext = createContext();
 
@@ -51,7 +44,7 @@ function Window({ children, name }) {
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }
 

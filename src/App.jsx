@@ -19,20 +19,19 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <>
-      {/* <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false}> */}
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Home></Home>}></Route>
-          <Route element={<AppLayout></AppLayout>}>
-            <Route path="discover" element={<Discover></Discover>}></Route>
-            <Route path="user" element={<User></User>}></Route>
-          </Route>
-          <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
-        </Routes>
-      </BrowserRouter>
-      {/* </ReactQueryDevtools>
-      </QueryClientProvider> */}
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Home></Home>}></Route>
+            <Route element={<AppLayout></AppLayout>}>
+              <Route path="discover" element={<Discover></Discover>}></Route>
+              <Route path="user" element={<User></User>}></Route>
+            </Route>
+            <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
+          </Routes>
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </>
   );
 }

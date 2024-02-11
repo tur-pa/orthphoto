@@ -1,13 +1,14 @@
-function Input({ children, type, id, disabled }) {
+const styledInput = `border border-gray-300 bg-gray-0 rounded-md py-3 px-5 shadow`;
+
+function Input({ type, id, disabled, formFn }) {
   return (
     <input
       type={type}
       id={id}
       disabled={disabled}
-      className="border border-gray-300 bg-gray-0 rounded-md py-3 px-5 shadow"
-    >
-      {children}
-    </input>
+      className={styledInput}
+      {...formFn}
+    ></input>
   );
 }
 
