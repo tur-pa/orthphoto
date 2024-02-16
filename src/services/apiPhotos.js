@@ -20,6 +20,8 @@ export async function addPhotoApi(newPhoto) {
   const imagePath = `${supabaseUrl}/storage/v1/object/public/photos/${imageName}`;
   let query = supabase.from("photos");
 
+  console.log(newPhoto);
+
   query = query.insert([{ ...newPhoto, image: imagePath }]);
 
   const { data, error } = await query.select().single();
