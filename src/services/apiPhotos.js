@@ -1,7 +1,17 @@
+import { GALLERY_SIZE } from "../utils/constants";
 import supabase, { supabaseUrl } from "./supabase";
 
-export async function getPhotos() {
-  let { data: photos, error } = await supabase.from("photos").select("*");
+export async function getPhotos({ pageParam = 1 }) {
+  let query = supabase.from("photos").select("*");
+  let from = (pageParam - 1) * GALLERY_SIZE;
+  let to = from + GALLERY_SIZE - 1;
+  // let { data: photos, error } = await supabase.from("photos").select("*");
+
+  if (pageParam) {
+    query = query.range(from, to);
+  }
+
+  let { data: photos, error } = await query;
 
   if (error) {
     console.error(error);

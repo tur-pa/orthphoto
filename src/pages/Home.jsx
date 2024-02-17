@@ -1,5 +1,4 @@
 import Gallery from "../ui/Gallery";
-import Button from "../ui/Button";
 import Footer from "../ui/Footer";
 import Navigation from "../ui/Navigation";
 import BackgroundImage from "../ui/BackgroundImage";
@@ -31,10 +30,6 @@ function Home() {
       </section>
 
       <Gallery></Gallery>
-
-      <section className={styledContainer + " justify-around"}>
-        <Button>Załaduj więcej</Button>
-      </section>
 
       <Footer></Footer>
     </div>
