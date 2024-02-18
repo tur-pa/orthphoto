@@ -1,4 +1,4 @@
-import Gallery from "../ui/Gallery";
+import InfiniteGallery from "../ui/InfiniteGallery";
 import Footer from "../ui/Footer";
 import Navigation from "../ui/Navigation";
 import BackgroundImage from "../ui/BackgroundImage";
@@ -29,7 +29,7 @@ function Home() {
         </select>
       </section>
 
-      <Gallery></Gallery>
+      <InfiniteGallery></InfiniteGallery>
 
       <Footer></Footer>
     </div>

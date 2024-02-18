@@ -11,6 +11,8 @@ const styledFilterSection = `container mx-auto my-8 flex justify-between`;
 
 function Discover() {
   const [filterCategory, setFilterCategory] = useState("photos");
+  const [countryFilter, setCountryFilter] = useState([]);
+
   return (
     <div>
       <section className={styledContainer}>
@@ -35,9 +37,10 @@ function Discover() {
         <div className="flex items-center">
           <SelectFilter
             options={[
-              { value: "date", label: "Data dodania" },
-              { value: "popularity", label: "Popularność" },
-              { value: "commented", label: "Komentowane" },
+              { value: "", label: "Sortuj według" },
+              { value: "created_at", label: "Data dodania" },
+              { value: "views", label: "Popularność" },
+              // { value: "commented", label: "Komentowane" },
             ]}
           ></SelectFilter>
           <Sort></Sort>
@@ -46,6 +49,8 @@ function Discover() {
       <section className={styledContainer}>
         {filterCategory === "country" && (
           <CheckboxFilter
+            setCountryFilter={setCountryFilter}
+            countryFilter={countryFilter}
             options={[
               { value: "poland", label: "Polska" },
               { value: "greece", label: "Grecja" },
