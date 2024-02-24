@@ -5,7 +5,6 @@ import CheckboxFilter from "../ui/CheckboxFilter";
 import { useState } from "react";
 import SelectFilter from "../ui/SelectFilter";
 import Button from "../ui/Button";
-import { usePhotos } from "../features/photos/usePhotos";
 
 const styledContainer = `container mx-auto transition-all`;
 const styledHeaderText = `text-5xl font-semibold text-gray-900`;
@@ -15,8 +14,8 @@ function Discover() {
   const [filterCategory, setFilterCategory] = useState("photos");
 
   const [filter, setFilter] = useState([
-    { name: "category", array: ["landscape"] },
-    { name: "country", array: ["poland", "greece"] },
+    { name: "category", array: [] },
+    { name: "country", array: [] },
   ]);
 
   function onClick() {}

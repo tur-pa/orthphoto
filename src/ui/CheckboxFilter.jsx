@@ -6,8 +6,6 @@ function CheckboxFilter({ options, filter, setFilter, filterCategory }) {
     filter?.find((el) => el.name === filterCategory).array,
   );
 
-  console.log(filter);
-
   function onChange(e) {
     if (e.target.checked) {
       setCheckboxValues((checkboxArray) => [e.target.value, ...checkboxArray]);
@@ -23,8 +21,13 @@ function CheckboxFilter({ options, filter, setFilter, filterCategory }) {
     setFilter(updatedFilter);
   }
 
+  console.log(filter);
+
   function onReset() {
-    setCheckboxValues([]);
+    const resetedFilter = filter.map((item) =>
+      item.name === filterCategory ? { ...item, array: [] } : item,
+    );
+    setFilter(resetedFilter);
   }
 
   return (

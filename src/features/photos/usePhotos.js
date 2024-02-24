@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { getPhotos } from "../../services/apiPhotos";
 import { useSearchParams } from "react-router-dom";
 
-export function usePhotos(checkboxFilter = {}) {
+export function usePhotos(filterBy) {
   const [searchParams] = useSearchParams();
 
   // SORT
@@ -16,8 +16,8 @@ export function usePhotos(checkboxFilter = {}) {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["photos", sortBy, checkboxFilter],
-    queryFn: () => getPhotos({ sortBy, checkboxFilter }),
+    queryKey: ["photos", sortBy, filterBy],
+    queryFn: () => getPhotos({ sortBy, filterBy }),
   });
 
   return { isLoading, photos, error };

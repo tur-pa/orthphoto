@@ -18,7 +18,7 @@ export async function getInfinitePhotos({ pageParam = 1 }) {
   return photos;
 }
 
-export async function getPhotos({ sortBy, checkboxFilter }) {
+export async function getPhotos({ sortBy, filterBy }) {
   let query = supabase.from("photos").select("*");
 
   // SORT
@@ -27,10 +27,7 @@ export async function getPhotos({ sortBy, checkboxFilter }) {
   }
 
   // FILTER
-  // console.log(Object.values(checkboxFilter).length);
-  // if (Object.values(checkboxFilter).length > 0) {
-  //   query.eq("country", "poland");
-  // }
+  filterBy.map((el) => el.array.length > 0 && query.eq(el.name, el.array));
 
   let { data: photos, error } = await query;
 

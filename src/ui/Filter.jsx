@@ -20,7 +20,7 @@ function Filter({ options, filterCategory, setFilterCategory, filter }) {
           </button>
           {
             <span>
-              {Object.keys(filter) === option.value ? "true" : "false"}
+              {filter?.find((el) => el.name === option.value)?.array.length}
             </span>
           }
         </>

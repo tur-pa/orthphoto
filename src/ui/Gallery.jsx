@@ -4,7 +4,7 @@ import Spinner from "./Spinner";
 const styledGallery = `container mx-auto`;
 const styledGrid = ``;
 
-function Gallery({ filter = {} }) {
+function Gallery({ filter }) {
   const { isLoading, photos } = usePhotos(filter);
 
   return (
