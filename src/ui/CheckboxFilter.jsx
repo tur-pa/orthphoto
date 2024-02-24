@@ -1,41 +1,42 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "./Button";
 
-function CheckboxFilter({ options, setCountryFilter, countryFilter }) {
-  const [checkedState, setCheckedState] = useState(
-    new Array(options.length).fill(false),
+function CheckboxFilter({ options, filter, setFilter, filterCategory }) {
+  const [checkboxValues, setCheckboxValues] = useState(
+    filter?.find((el) => el.name === filterCategory).array,
   );
 
-  function onChange(e, index) {
-    console.log(index);
-    setCheckedState(checkedState.map((el, i) => (index === i ? !el : el)));
-    console.log(checkedState);
+  console.log(filter);
+
+  function onChange(e) {
     if (e.target.checked) {
-      setCountryFilter((countryArray) => [e.target.value, ...countryArray]);
+      setCheckboxValues((checkboxArray) => [e.target.value, ...checkboxArray]);
     } else {
-      setCountryFilter((countryArray) =>
-        countryArray.filter((el) => el !== e.target.value),
+      setCheckboxValues((checkboxArray) =>
+        checkboxArray.filter((el) => el !== e.target.value),
       );
     }
-    console.log(countryFilter);
+
+    const updatedFilter = filter.map((item) =>
+      item.name === filterCategory ? { ...item, array: checkboxValues } : item,
+    );
+    setFilter(updatedFilter);
   }
 
   function onReset() {
-    setCountryFilter([]);
-    console.log(checkedState);
-    setCheckedState(checkedState.fill(false));
+    setCheckboxValues([]);
   }
 
   return (
     <>
       <div className="mb-7 grid grid-cols-3 gap-x-7">
-        {options.map((option, index) => (
+        {options.map((option) => (
           <div key={option.value} className="left-1/2 flex items-center">
             <label className="ms-2 flex items-center gap-1 font-normal text-gray-800">
               <input
-                checked={checkedState[index]}
+                checked={checkboxValues?.includes(option.value)}
                 value={option.value}
-                onChange={(e) => onChange(e, index)}
+                onChange={(e) => onChange(e)}
                 type="checkbox"
                 className=" h-4 w-4 rounded bg-gray-300 text-gray-600"
               ></input>
@@ -45,7 +46,6 @@ function CheckboxFilter({ options, setCountryFilter, countryFilter }) {
         ))}
       </div>
       <div className="flex gap-4">
-        <Button>Zatwierdź</Button>
         <Button onClick={onReset}>Resetuj</Button>
       </div>
     </>

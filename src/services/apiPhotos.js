@@ -18,15 +18,19 @@ export async function getInfinitePhotos({ pageParam = 1 }) {
   return photos;
 }
 
-export async function getPhotos({ sortBy }) {
+export async function getPhotos({ sortBy, checkboxFilter }) {
   let query = supabase.from("photos").select("*");
-  // FILTER
 
   // SORT
   if (sortBy.sortField && sortBy.sortDir) {
-    console.log("test");
     query.order(sortBy.sortField, { ascending: sortBy.sortDir === "asc" });
   }
+
+  // FILTER
+  // console.log(Object.values(checkboxFilter).length);
+  // if (Object.values(checkboxFilter).length > 0) {
+  //   query.eq("country", "poland");
+  // }
 
   let { data: photos, error } = await query;
 
