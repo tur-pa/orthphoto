@@ -18,8 +18,6 @@ function Discover() {
     { name: "country", array: [] },
   ]);
 
-  function onClick() {}
-
   return (
     <div>
       <section className={styledContainer}>
@@ -41,7 +39,6 @@ function Discover() {
               { value: "users", label: "Użytkownicy" },
             ]}
           ></Filter>
-          <Button onClick={() => onClick()}>Zatwierdź</Button>
         </div>
         <div className="flex items-center">
           <SelectFilter

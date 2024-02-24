@@ -14,20 +14,21 @@ function CheckboxFilter({ options, filter, setFilter, filterCategory }) {
         checkboxArray.filter((el) => el !== e.target.value),
       );
     }
+  }
 
+  function onClick() {
     const updatedFilter = filter.map((item) =>
       item.name === filterCategory ? { ...item, array: checkboxValues } : item,
     );
     setFilter(updatedFilter);
   }
 
-  console.log(filter);
-
   function onReset() {
     const resetedFilter = filter.map((item) =>
       item.name === filterCategory ? { ...item, array: [] } : item,
     );
     setFilter(resetedFilter);
+    setCheckboxValues([]);
   }
 
   return (
@@ -49,7 +50,8 @@ function CheckboxFilter({ options, filter, setFilter, filterCategory }) {
         ))}
       </div>
       <div className="flex gap-4">
-        <Button onClick={onReset}>Resetuj</Button>
+        <Button onClick={() => onClick()}>Zatwierdź</Button>
+        <Button onClick={() => onReset()}>Resetuj</Button>
       </div>
     </>
   );
