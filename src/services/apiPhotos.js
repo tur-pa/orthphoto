@@ -18,15 +18,16 @@ export async function getInfinitePhotos({ pageParam = 1 }) {
   return photos;
 }
 
-export async function getPhotos({ sortBy }) {
+export async function getPhotos({ sortBy, filterBy }) {
   let query = supabase.from("photos").select("*");
-  // FILTER
 
   // SORT
   if (sortBy.sortField && sortBy.sortDir) {
-    console.log("test");
     query.order(sortBy.sortField, { ascending: sortBy.sortDir === "asc" });
   }
+
+  // FILTER
+  filterBy?.map((el) => el.array.length > 0 && query.eq(el.name, el.array));
 
   let { data: photos, error } = await query;
 

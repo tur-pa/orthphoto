@@ -2,8 +2,8 @@ import Gallery from "../ui/Gallery";
 import Filter from "../ui/Filter";
 import Sort from "../ui/Sort";
 import CheckboxFilter from "../ui/CheckboxFilter";
-import { useState } from "react";
 import SelectFilter from "../ui/SelectFilter";
+import { useState } from "react";
 
 const styledContainer = `container mx-auto transition-all`;
 const styledHeaderText = `text-5xl font-semibold text-gray-900`;
@@ -11,7 +11,11 @@ const styledFilterSection = `container mx-auto my-8 flex justify-between`;
 
 function Discover() {
   const [filterCategory, setFilterCategory] = useState("photos");
-  const [countryFilter, setCountryFilter] = useState([]);
+
+  const [filter, setFilter] = useState([
+    { name: "category", array: [] },
+    { name: "country", array: [] },
+  ]);
 
   return (
     <div>
@@ -22,8 +26,9 @@ function Discover() {
       </section>
 
       <section className={styledFilterSection}>
-        <div>
+        <div className="flex gap-3">
           <Filter
+            filter={filter}
             filterCategory={filterCategory}
             setFilterCategory={setFilterCategory}
             options={[
@@ -49,8 +54,9 @@ function Discover() {
       <section className={styledContainer}>
         {filterCategory === "country" && (
           <CheckboxFilter
-            setCountryFilter={setCountryFilter}
-            countryFilter={countryFilter}
+            filter={filter}
+            setFilter={setFilter}
+            filterCategory={filterCategory}
             options={[
               { value: "poland", label: "Polska" },
               { value: "greece", label: "Grecja" },
@@ -68,6 +74,9 @@ function Discover() {
       <section className={styledContainer}>
         {filterCategory === "category" && (
           <CheckboxFilter
+            filter={filter}
+            setFilter={setFilter}
+            filterCategory={filterCategory}
             options={[
               { value: "landscape", label: "Krajobrazy" },
               {
@@ -91,7 +100,7 @@ function Discover() {
           ></CheckboxFilter>
         )}
       </section>
-      <Gallery></Gallery>
+      <Gallery filter={filter}></Gallery>
     </div>
   );
 }

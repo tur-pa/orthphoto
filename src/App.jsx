@@ -7,6 +7,7 @@ import PageNotFound from "./pages/PageNotFound";
 import Discover from "./pages/Discover";
 import User from "./pages/User";
 import AppLayout from "./ui/AppLayout";
+import { DataProvider } from "./context/DataContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,7 +19,7 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <>
+    <DataProvider>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
@@ -32,7 +33,7 @@ function App() {
         </BrowserRouter>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
-    </>
+    </DataProvider>
   );
 }
 
