@@ -2,28 +2,28 @@ import { useState } from "react";
 import Button from "./Button";
 
 function CheckboxFilter({ options, filter, setFilter, filterCategory }) {
-  const [checkboxValues, setCheckboxValues] = useState(
-    filter?.find((el) => el.name === filterCategory).array,
-  );
+  const filterArray = filter?.find((el) => el.name === filterCategory)?.array;
+  const [checkboxValues, setCheckboxValues] = useState(filterArray || []);
 
   function onChange(e) {
-    if (e.target.checked) {
-      setCheckboxValues((checkboxArray) => [e.target.value, ...checkboxArray]);
-    } else {
+    const { value, checked } = e.target;
+    if (checked) {
       setCheckboxValues((checkboxArray) =>
-        checkboxArray.filter((el) => el !== e.target.value),
+        checked
+          ? [value, ...checkboxArray]
+          : checkboxArray.filter((el) => el !== value),
       );
     }
   }
 
-  function onClick() {
+  function applyFilter() {
     const updatedFilter = filter.map((item) =>
       item.name === filterCategory ? { ...item, array: checkboxValues } : item,
     );
     setFilter(updatedFilter);
   }
 
-  function onReset() {
+  function resetFilter() {
     const resetedFilter = filter.map((item) =>
       item.name === filterCategory ? { ...item, array: [] } : item,
     );
@@ -50,8 +50,8 @@ function CheckboxFilter({ options, filter, setFilter, filterCategory }) {
         ))}
       </div>
       <div className="flex gap-4">
-        <Button onClick={() => onClick()}>Zatwierdź</Button>
-        <Button onClick={() => onReset()}>Resetuj</Button>
+        <Button onClick={applyFilter}>Zatwierdź</Button>
+        <Button onClick={resetFilter}>Resetuj</Button>
       </div>
     </>
   );

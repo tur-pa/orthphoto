@@ -2,9 +2,8 @@ import Gallery from "../ui/Gallery";
 import Filter from "../ui/Filter";
 import Sort from "../ui/Sort";
 import CheckboxFilter from "../ui/CheckboxFilter";
-import { useState } from "react";
 import SelectFilter from "../ui/SelectFilter";
-import Button from "../ui/Button";
+import { useState } from "react";
 
 const styledContainer = `container mx-auto transition-all`;
 const styledHeaderText = `text-5xl font-semibold text-gray-900`;
