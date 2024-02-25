@@ -1,5 +1,7 @@
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Button from "./Button";
+import { usePhotos } from "../features/photos/usePhotos";
+import { useDataContext } from "../context/DataContext";
 
 const base = `flex w-full`;
 const styles = {
@@ -10,6 +12,18 @@ const styledSelect = `rounded-s-lg border border-gray-300 bg-gray-50 px-1 py-2.5
 const styledInput = `w-full rounded-e-lg border border-s-2 border-gray-300 border-s-gray-50 bg-gray-50 p-2.5 text-sm text-gray-900`;
 
 function SearchForm({ type = "marginY" }) {
+  const { isLoading, photos } = usePhotos();
+  const { setSearchData, setIsSearching } = useDataContext();
+
+  function liveSearch(e) {
+    e.target.value ? setIsSearching(true) : setIsSearching(false);
+    setSearchData(
+      photos.filter((photo) =>
+        photo.name.toLowerCase().includes(e.target.value.toLowerCase()),
+      ),
+    );
+  }
+
   return (
     <form className={styles[type]}>
       <select className={styledSelect}>
@@ -18,8 +32,10 @@ function SearchForm({ type = "marginY" }) {
       </select>
       <input
         type="search"
+        onChange={liveSearch}
         placeholder="Wyszukaj..."
         className={styledInput}
+        disabled={isLoading}
       ></input>
       <Button type="iconBtn">
         <FaMagnifyingGlass />

@@ -27,7 +27,7 @@ export async function getPhotos({ sortBy, filterBy }) {
   }
 
   // FILTER
-  filterBy.map((el) => el.array.length > 0 && query.eq(el.name, el.array));
+  filterBy?.map((el) => el.array.length > 0 && query.eq(el.name, el.array));
 
   let { data: photos, error } = await query;
 
