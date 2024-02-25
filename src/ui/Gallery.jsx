@@ -1,7 +1,3 @@
-import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lg-thumbnail.css";
-
 import { useDataContext } from "../context/DataContext";
 import { usePhotos } from "../features/photos/usePhotos";
 import Spinner from "./Spinner";
