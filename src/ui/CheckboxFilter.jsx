@@ -7,13 +7,12 @@ function CheckboxFilter({ options, filter, setFilter, filterCategory }) {
 
   function onChange(e) {
     const { value, checked } = e.target;
-    if (checked) {
-      setCheckboxValues((checkboxArray) =>
-        checked
-          ? [value, ...checkboxArray]
-          : checkboxArray.filter((el) => el !== value),
-      );
-    }
+
+    setCheckboxValues((checkboxArray) =>
+      checked
+        ? [value, ...checkboxArray]
+        : checkboxArray.filter((el) => el !== value),
+    );
   }
 
   function applyFilter() {
