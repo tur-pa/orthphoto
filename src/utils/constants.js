@@ -1,1 +1,1 @@
-export const GALLERY_SIZE = 3;
+export const GALLERY_SIZE = 5;

@@ -18,8 +18,8 @@ export async function getInfinitePhotos({ pageParam = 1 }) {
   return photos;
 }
 
-export async function getPhotos({ sortBy, filterBy }) {
-  let query = supabase.from("photos").select("*");
+export async function getPhotos({ sortBy, filterBy, page }) {
+  let query = supabase.from("photos").select("*", { count: "exact" });
 
   // SORT
   if (sortBy.sortField && sortBy.sortDir) {
@@ -29,14 +29,22 @@ export async function getPhotos({ sortBy, filterBy }) {
   // FILTER
   filterBy?.map((el) => el.array.length > 0 && query.eq(el.name, el.array));
 
-  let { data: photos, error } = await query;
+  // PAGINATION
+
+  if (page) {
+    const from = (page - 1) * GALLERY_SIZE;
+    const to = from + GALLERY_SIZE - 1;
+    query = query.range(from, to);
+  }
+
+  let { data, error, count } = await query;
 
   if (error) {
     console.error(error);
     throw new Error("Zdjęcie nie mogło zostać załadowane");
   }
 
-  return photos;
+  return { data, count };
 }
 
 export async function addPhotoApi(newPhoto) {

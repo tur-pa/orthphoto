@@ -1,15 +1,12 @@
-import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lg-thumbnail.css";
-
 import { useDataContext } from "../context/DataContext";
 import { usePhotos } from "../features/photos/usePhotos";
+import Pagination from "./Pagination";
 import Spinner from "./Spinner";
 
 const styledGallery = `container mx-auto`;
 
 function Gallery({ filter }) {
-  const { isLoading, photos } = usePhotos(filter);
+  const { isLoading, photos, count } = usePhotos(filter);
   const { searchData, isSearching } = useDataContext();
 
   const dataToMap = isSearching ? searchData : photos;
@@ -28,6 +25,9 @@ function Gallery({ filter }) {
           ))}
         </div>
         {isLoading && <Spinner />}
+        <div className="flex justify-center">
+          <Pagination count={count}></Pagination>
+        </div>
       </div>
     </>
   );
