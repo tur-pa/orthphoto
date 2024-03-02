@@ -3,20 +3,14 @@ import Filter from "../ui/Filter";
 import Sort from "../ui/Sort";
 import CheckboxFilter from "../ui/CheckboxFilter";
 import SelectFilter from "../ui/SelectFilter";
-import { useState } from "react";
+import { useDataContext } from "../context/DataContext";
 
 const styledContainer = `container mx-auto transition-all`;
 const styledHeaderText = `text-5xl font-semibold text-gray-900`;
 const styledFilterSection = `container mx-auto my-8 flex justify-between`;
 
 function Discover() {
-  const [filterCategory, setFilterCategory] = useState("photos");
-
-  const [filter, setFilter] = useState([
-    { name: "category", array: [] },
-    { name: "country", array: [] },
-  ]);
-
+  const { filter, filterCategory } = useDataContext();
   return (
     <div>
       <section className={styledContainer}>
@@ -28,9 +22,6 @@ function Discover() {
       <section className={styledFilterSection}>
         <div className="flex gap-3">
           <Filter
-            filter={filter}
-            filterCategory={filterCategory}
-            setFilterCategory={setFilterCategory}
             options={[
               { value: "photos", label: "Zdjęcia" },
               { value: "country", label: "Kraj" },
@@ -54,9 +45,6 @@ function Discover() {
       <section className={styledContainer}>
         {filterCategory === "country" && (
           <CheckboxFilter
-            filter={filter}
-            setFilter={setFilter}
-            filterCategory={filterCategory}
             options={[
               { value: "poland", label: "Polska" },
               { value: "greece", label: "Grecja" },
@@ -74,9 +62,6 @@ function Discover() {
       <section className={styledContainer}>
         {filterCategory === "category" && (
           <CheckboxFilter
-            filter={filter}
-            setFilter={setFilter}
-            filterCategory={filterCategory}
             options={[
               { value: "landscape", label: "Krajobrazy" },
               {

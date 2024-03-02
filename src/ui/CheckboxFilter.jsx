@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Button from "./Button";
+import { useDataContext } from "../context/DataContext";
 
-function CheckboxFilter({ options, filter, setFilter, filterCategory }) {
+function CheckboxFilter({ options }) {
+  const { filter, setFilter, filterCategory } = useDataContext();
   const filterArray = filter?.find((el) => el.name === filterCategory)?.array;
   const [checkboxValues, setCheckboxValues] = useState(filterArray || []);
 

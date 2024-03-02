@@ -3,12 +3,26 @@ import { createContext, useContext, useState } from "react";
 const DataContext = createContext();
 
 function DataProvider({ children }) {
-  const [searchData, setSearchData] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [filterCategory, setFilterCategory] = useState("photos");
+  const [searchCategory, setSearchCategory] = useState("name");
+
+  const [filter, setFilter] = useState([
+    { name: "name", array: [] },
+    { name: "author", array: [] },
+    { name: "category", array: [] },
+    { name: "country", array: [] },
+  ]);
 
   return (
     <DataContext.Provider
-      value={{ searchData, setSearchData, setIsSearching, isSearching }}
+      value={{
+        filter,
+        setFilter,
+        filterCategory,
+        setFilterCategory,
+        searchCategory,
+        setSearchCategory,
+      }}
     >
       {children}
     </DataContext.Provider>

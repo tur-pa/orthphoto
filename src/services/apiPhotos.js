@@ -27,7 +27,10 @@ export async function getPhotos({ sortBy, filterBy, page }) {
   }
 
   // FILTER
-  filterBy?.map((el) => el.array.length > 0 && query.eq(el.name, el.array));
+  console.log(filterBy);
+  filterBy?.map(
+    (el) => el.array.length > 0 && query.ilike(el.name, `%${el.array}%`),
+  );
 
   // PAGINATION
 
