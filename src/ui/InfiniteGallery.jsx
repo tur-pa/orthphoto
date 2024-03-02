@@ -1,9 +1,11 @@
 import { useInfinitePhotos } from "../features/photos/useInfinitePhotos";
 import Spinner from "./Spinner";
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 
 const styledGallery = `container mx-auto`;
-const styledGrid = `columns-3 gap-7 [&>img:not(:first-child)]:mt-5 transition-all}`;
+const styledGrid = `mt-5 grid grid-cols-3 gap-7 transition-all`;
+// const styledGrid = `columns-3 gap-7 [&>img:not(:first-child)]:mt-5 transition-all}`;
+// const styledImg = `opacity-100 transition-all duration-200 hover:scale-[1.05]`;
 
 function InfiniteGallery() {
   const { isFetching, photos, fetchNextPage, hasNextPage } =
@@ -40,17 +42,17 @@ function InfiniteGallery() {
       <div className={styledGrid}>
         {photos === undefined
           ? null
-          : photos.pages.map((photoPage) => (
-              <>
-                {photoPage.map((photo) => (
+          : photos.pages.map((photoPage, id) => (
+              <Fragment key={id}>
+                {photoPage.map((photo, id) => (
                   <img
                     src={photo.image}
                     alt={photo.name}
-                    key={photo.name}
-                    className={`opacity-100 transition-all duration-200 hover:scale-[1.05]`}
+                    key={id}
+                    className={`h-full object-cover transition-all duration-200 hover:scale-[1.05]`}
                   ></img>
                 ))}
-              </>
+              </Fragment>
             ))}
       </div>
       {isFetching && <Spinner />}

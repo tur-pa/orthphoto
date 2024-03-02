@@ -1,10 +1,14 @@
 import { GALLERY_SIZE } from "../utils/constants";
 import supabase, { supabaseUrl } from "./supabase";
 
-export async function getInfinitePhotos({ pageParam = 1 }) {
+export async function getInfinitePhotos({ pageParam = 1, sortBy }) {
   let query = supabase.from("photos").select("*");
   let from = (pageParam - 1) * GALLERY_SIZE;
   let to = from + GALLERY_SIZE - 1;
+
+  if (sortBy.sortField && sortBy.sortDir) {
+    query.order(sortBy.sortField, { ascending: sortBy.sortDir === "asc" });
+  }
 
   query = query.range(from, to);
 
@@ -27,7 +31,20 @@ export async function getPhotos({ sortBy, filterBy, page }) {
   }
 
   // FILTER
-  filterBy?.map((el) => el.array.length > 0 && query.eq(el.name, el.array));
+  filterBy?.map((el) => {
+    if (el.array.length > 0)
+      switch (el.name) {
+        case "name":
+          return query.ilike(el.name, `%${el.array}%`);
+
+        case "tags":
+          return query.contains(el.name, el.array);
+
+        default:
+          return query.in(el.name, el.array);
+      }
+    return null;
+  });
 
   // PAGINATION
 
