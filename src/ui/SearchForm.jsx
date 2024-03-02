@@ -2,6 +2,7 @@ import { FaMagnifyingGlass, FaXmark } from "react-icons/fa6";
 import Button from "./Button";
 import { useDataContext } from "../context/DataContext";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const base = `flex w-full`;
 const styles = {
@@ -14,9 +15,16 @@ const styledInputContainer = `relative w-full`;
 const clearButton = `absolute inset-y-0 right-0 flex items-center pr-2 cursor-pointer text-gray-400`;
 
 function SearchForm({ type = "marginY" }) {
-  const [searchText, setSearchText] = useState("");
-  const { filter, setFilter, setSearchCategory, searchCategory } =
-    useDataContext();
+  const {
+    filter,
+    setFilter,
+    setSearchCategory,
+    searchCategory,
+    searchText,
+    setSearchText,
+  } = useDataContext();
+
+  const navigate = useNavigate();
 
   function setCategory(e) {
     onReset();
@@ -30,14 +38,14 @@ function SearchForm({ type = "marginY" }) {
   function onSubmit(e) {
     // FOR MULTI TAGS
     setSearchText(searchText.split(",").map((el) => el.trim()));
-    console.log(searchText);
-    // console.log(searchText);
     //
+
     const updatedFilter = filter.map((item) =>
       item.name === searchCategory ? { ...item, array: [searchText] } : item,
     );
     setFilter(updatedFilter);
     e.preventDefault();
+    navigate("/discover");
   }
 
   function onReset() {
@@ -53,7 +61,6 @@ function SearchForm({ type = "marginY" }) {
       <select
         onChange={setCategory}
         defaultValue="name"
-        value={searchCategory}
         className={styledSelect}
       >
         <option value="name">Odkrywaj</option>

@@ -1,10 +1,14 @@
 import { GALLERY_SIZE } from "../utils/constants";
 import supabase, { supabaseUrl } from "./supabase";
 
-export async function getInfinitePhotos({ pageParam = 1 }) {
+export async function getInfinitePhotos({ pageParam = 1, sortBy }) {
   let query = supabase.from("photos").select("*");
   let from = (pageParam - 1) * GALLERY_SIZE;
   let to = from + GALLERY_SIZE - 1;
+
+  if (sortBy.sortField && sortBy.sortDir) {
+    query.order(sortBy.sortField, { ascending: sortBy.sortDir === "asc" });
+  }
 
   query = query.range(from, to);
 
@@ -51,7 +55,7 @@ export async function getPhotos({ sortBy, filterBy, page }) {
   }
 
   let { data, error, count } = await query;
-  console.log(filterBy);
+
   if (error) {
     console.error(error);
     throw new Error("Zdjęcie nie mogło zostać załadowane");

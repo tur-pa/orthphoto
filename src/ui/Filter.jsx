@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useDataContext } from "../context/DataContext";
 
 const styledFilter = `border border-gray-100 shadow-sm rounded-md p-2 flex gap-1 w-fit`;
@@ -9,8 +10,8 @@ function Filter({ options }) {
   const { filterCategory, setFilterCategory, filter } = useDataContext();
   return (
     <div className={styledFilter}>
-      {options.map((option) => (
-        <>
+      {options.map((option, id) => (
+        <Fragment key={id}>
           <button
             key={option.value}
             className={
@@ -27,7 +28,7 @@ function Filter({ options }) {
               {filter?.find((el) => el.name === option.value)?.array.length}
             </span>
           }
-        </>
+        </Fragment>
       ))}
     </div>
   );

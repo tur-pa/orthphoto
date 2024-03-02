@@ -9,7 +9,9 @@ function Header() {
   return (
     <>
       <header className={styledHeader}>
-        <h1 className={styledLogo}>Orthphoto</h1>
+        <a href="/" className={styledLogo}>
+          Orthphoto
+        </a>
         <SearchForm type="marginX"></SearchForm>
         <Menu></Menu>
       </header>

@@ -5,6 +5,7 @@ const DataContext = createContext();
 function DataProvider({ children }) {
   const [filterCategory, setFilterCategory] = useState("photos");
   const [searchCategory, setSearchCategory] = useState("name");
+  const [searchText, setSearchText] = useState("");
 
   const [filter, setFilter] = useState([
     { name: "name", array: [] },
@@ -23,6 +24,8 @@ function DataProvider({ children }) {
         setFilterCategory,
         searchCategory,
         setSearchCategory,
+        searchText,
+        setSearchText,
       }}
     >
       {children}

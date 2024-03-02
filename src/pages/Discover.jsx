@@ -36,7 +36,8 @@ function Discover() {
               { value: "", label: "Sortuj według" },
               { value: "created_at", label: "Data dodania" },
               { value: "views", label: "Popularność" },
-              // { value: "commented", label: "Komentowane" },
+              { value: "rating", label: "Najwyżej oceniane" },
+              { value: "comments_num", label: "Komentowane" },
             ]}
           ></SelectFilter>
           <Sort></Sort>
