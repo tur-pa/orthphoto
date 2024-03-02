@@ -9,6 +9,7 @@ function DataProvider({ children }) {
   const [filter, setFilter] = useState([
     { name: "name", array: [] },
     { name: "author", array: [] },
+    { name: "tags", array: [] },
     { name: "category", array: [] },
     { name: "country", array: [] },
   ]);

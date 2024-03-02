@@ -27,10 +27,20 @@ export async function getPhotos({ sortBy, filterBy, page }) {
   }
 
   // FILTER
-  console.log(filterBy);
-  filterBy?.map(
-    (el) => el.array.length > 0 && query.ilike(el.name, `%${el.array}%`),
-  );
+  filterBy?.map((el) => {
+    if (el.array.length > 0)
+      switch (el.name) {
+        case "name":
+          return query.ilike(el.name, `%${el.array}%`);
+
+        case "tags":
+          return query.contains(el.name, el.array);
+
+        default:
+          return query.in(el.name, el.array);
+      }
+    return null;
+  });
 
   // PAGINATION
 
@@ -41,7 +51,7 @@ export async function getPhotos({ sortBy, filterBy, page }) {
   }
 
   let { data, error, count } = await query;
-
+  console.log(filterBy);
   if (error) {
     console.error(error);
     throw new Error("Zdjęcie nie mogło zostać załadowane");

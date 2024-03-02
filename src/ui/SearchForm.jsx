@@ -10,7 +10,7 @@ const styles = {
 };
 const styledSelect = `rounded-s-lg border border-gray-300 bg-gray-50 px-1 py-2.5 text-center text-sm font-medium text-gray-900`;
 const styledInput = `search-cancel:appearance-none relative w-full rounded-e-lg border border-s-2 border-gray-300 border-s-gray-50 bg-gray-50 p-2.5 text-sm text-gray-900 `;
-const styledInputContainer = `relative`;
+const styledInputContainer = `relative w-full`;
 const clearButton = `absolute inset-y-0 right-0 flex items-center pr-2 cursor-pointer text-gray-400`;
 
 function SearchForm({ type = "marginY" }) {
@@ -28,8 +28,13 @@ function SearchForm({ type = "marginY" }) {
   }
 
   function onSubmit(e) {
+    // FOR MULTI TAGS
+    setSearchText(searchText.split(",").map((el) => el.trim()));
+    console.log(searchText);
+    // console.log(searchText);
+    //
     const updatedFilter = filter.map((item) =>
-      item.name === searchCategory ? { ...item, array: searchText } : item,
+      item.name === searchCategory ? { ...item, array: [searchText] } : item,
     );
     setFilter(updatedFilter);
     e.preventDefault();
@@ -38,7 +43,7 @@ function SearchForm({ type = "marginY" }) {
   function onReset() {
     setSearchText("");
     const updatedFilter = filter.map((item) =>
-      item.name === searchCategory ? { ...item, array: "" } : item,
+      item.name === searchCategory ? { ...item, array: [] } : item,
     );
     setFilter(updatedFilter);
   }
@@ -53,12 +58,13 @@ function SearchForm({ type = "marginY" }) {
       >
         <option value="name">Odkrywaj</option>
         <option value="author">Autor</option>
+        <option value="tags">Tagi</option>
       </select>
       <div className={styledInputContainer}>
         <input
           type="search"
           onChange={liveSearch}
-          value={searchText}
+          value={Array.isArray(searchText) ? searchText.join(", ") : searchText}
           placeholder="Wyszukaj..."
           className={styledInput}
         ></input>
