@@ -64,6 +64,21 @@ export async function getPhotos({ sortBy, filterBy, page }) {
   return { data, count };
 }
 
+export async function getPhoto(photoId) {
+  const { data, error } = await supabase
+    .from("photos")
+    .select("*")
+    .eq("id", photoId)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Photo not found");
+  }
+
+  return data;
+}
+
 export async function addPhotoApi(newPhoto) {
   const imageName =
     `${Math.floor(Math.random() * 10)}-${newPhoto.image.name}`.replaceAll(
