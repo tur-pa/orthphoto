@@ -1,8 +1,9 @@
 import { useSearchParams } from "react-router-dom";
 import { GALLERY_SIZE } from "../utils/constants";
 
-const liStyled = `relative block rounded px-3 py-1.5 text-lg text-gray-600 transition-all hover:bg-gray-100 disabled:invisible`;
-const liStyledActivated = liStyled + ` font-medium bg-gray-100`;
+const liStyled = `list-none`;
+const buttonStyled = `relative block rounded px-3 py-1.5 text-lg text-gray-600 transition-all hover:bg-gray-100 disabled:invisible`;
+const buttonStyledActivated = buttonStyled + ` font-medium bg-gray-100`;
 
 function Pagination({ count }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,33 +45,48 @@ function Pagination({ count }) {
         {isRenderingPrev && (
           <>
             <li className={liStyled}>
-              <button onClick={prevPage}>Poprzednia</button>
+              <button className={buttonStyled} onClick={prevPage}>
+                Poprzednia
+              </button>
             </li>
             <li className={liStyled}>
-              <button onClick={() => customPage(currentPage - 1)}>
+              <button
+                className={buttonStyled}
+                onClick={() => customPage(currentPage - 1)}
+              >
                 {currentPage - 1}
               </button>
             </li>
           </>
         )}
-        <li className={liStyledActivated}>
-          <button>{currentPage}</button>
+        <li className={liStyled}>
+          <button className={buttonStyledActivated}>{currentPage}</button>
         </li>
         {isRenderingNext && (
           <>
             <li className={liStyled}>
-              <button onClick={() => customPage(currentPage + 1)}>
+              <button
+                className={buttonStyled}
+                onClick={() => customPage(currentPage + 1)}
+              >
                 {currentPage + 1}
               </button>
             </li>
             <li className={liStyled}>
-              <button>...</button>
+              <button className={buttonStyled}>...</button>
             </li>
             <li className={liStyled}>
-              <button onClick={() => customPage(pageCount)}>{pageCount}</button>
+              <button
+                className={buttonStyled}
+                onClick={() => customPage(pageCount)}
+              >
+                {pageCount}
+              </button>
             </li>
             <li className={liStyled}>
-              <button onClick={nextPage}>Następna</button>
+              <button className={buttonStyled} onClick={nextPage}>
+                Następna
+              </button>
             </li>
           </>
         )}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FaRegComment } from "react-icons/fa6";
 import { FaEllipsis } from "react-icons/fa6";
 
@@ -5,7 +6,7 @@ function Comments() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   return (
     <>
-      <section className="py-4 lg:py-6">
+      <section className="my-1 lg:my-2">
         <div className="mx-auto max-w-2xl">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-lg font-bold text-gray-900 lg:text-2xl">
@@ -32,7 +33,7 @@ function Comments() {
             </button>
           </form>
           <article className="rounded-lg bg-white p-2 text-base">
-            <footer className="mb-2 flex items-center justify-between">
+            <footer className="relative mb-2 flex items-center justify-between">
               <div className="flex items-center">
                 <p className="mr-3 inline-flex items-center text-sm font-semibold text-gray-900">
                   <img
@@ -47,46 +48,32 @@ function Comments() {
               <button
                 className="inline-flex items-center rounded-lg bg-white p-2 text-center text-sm font-medium text-gray-500 hover:bg-gray-100"
                 type="button"
+                onClick={() => setIsOpenMenu(!isOpenMenu)}
               >
                 <FaEllipsis />
                 <span className="sr-only">Ustawienia komentarza</span>
               </button>
-              {
-                <div
-                  id="dropdownComment1"
-                  class="z-10 hidden w-36 divide-y divide-gray-100 rounded bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
-                >
-                  <ul
-                    class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownMenuIconHorizontalButton"
-                  >
+              {isOpenMenu && (
+                <div class="absolute right-0 top-8 w-24 translate-x-2/4 divide-y divide-gray-100 rounded bg-white shadow">
+                  <ul class="py-1 text-sm text-gray-700 ">
                     <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Edit
+                      <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">
+                        Edytuj
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Remove
+                      <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">
+                        Usuń
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Report
+                      <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">
+                        Zgłoś
                       </a>
                     </li>
                   </ul>
                 </div>
-              }
+              )}
             </footer>
             <p className=" text-gray-500">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt,
@@ -94,10 +81,10 @@ function Comments() {
               fuga earum eaque iusto reiciendis voluptatem dolorum, nesciunt
               fugiat fugit eveniet?
             </p>
-            <div className="mt-4 flex items-center space-x-4">
-              <FaRegComment />
-              <button className="text-sm font-medium text-gray-500  hover:underline">
-                Odpowiedz
+            <div className="mt-4">
+              <button className="flex items-center space-x-4 text-sm font-medium text-gray-500 hover:underline">
+                <FaRegComment />
+                <span>Odpowiedz</span>
               </button>
             </div>
           </article>
