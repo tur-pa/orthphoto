@@ -1,9 +1,5 @@
 function Login() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <div className="grid grid-cols-2"></div>;
 }
 
-export default Login
+export default Login;

@@ -11,7 +11,7 @@ import Photo from "./pages/Photo";
 
 import { DataProvider } from "./context/DataContext";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
+import SignUp from "./pages/SignUp";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,27 +23,24 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <DataProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <DataProvider>
         <BrowserRouter>
           <Routes>
             <Route index element={<Home></Home>}></Route>
             <Route element={<AppLayout></AppLayout>}>
               <Route path="discover" element={<Discover></Discover>}></Route>
               <Route path="user" element={<User></User>}></Route>
-              <Route path="photo/:photoId" element={<Photo></Photo>}></Route>
-              <Route path="photo/login" element={<Login></Login>}></Route>
-              <Route
-                path="photo/register"
-                element={<Register></Register>}
-              ></Route>
+              <Route path="photo/:urlId" element={<Photo></Photo>}></Route>
+              <Route path="login" element={<Login></Login>}></Route>
+              <Route path="signup" element={<SignUp></SignUp>}></Route>
             </Route>
             <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
           </Routes>
         </BrowserRouter>
         <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </DataProvider>
+      </DataProvider>
+    </QueryClientProvider>
   );
 }
 

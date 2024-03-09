@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { useCount } from "../features/photos/useCount";
 
 const DataContext = createContext();
 
@@ -6,6 +7,7 @@ function DataProvider({ children }) {
   const [filterCategory, setFilterCategory] = useState("photos");
   const [searchCategory, setSearchCategory] = useState("name");
   const [searchText, setSearchText] = useState("");
+  const { count, isLoading: isLoadingCount } = useCount();
 
   const [filter, setFilter] = useState([
     { name: "name", array: [] },
@@ -26,6 +28,8 @@ function DataProvider({ children }) {
         setSearchCategory,
         searchText,
         setSearchText,
+        count,
+        isLoadingCount,
       }}
     >
       {children}

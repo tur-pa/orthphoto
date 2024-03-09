@@ -79,6 +79,18 @@ export async function getPhoto(photoId) {
   return data;
 }
 
+export async function getCountRows() {
+  const { count, error } = await supabase
+    .from("photos")
+    .select("*", { count: "exact", head: true });
+
+  if (error) {
+    console.error(error);
+    throw new Error("Photo not found");
+  }
+  return count;
+}
+
 export async function addPhotoApi(newPhoto) {
   const imageName =
     `${Math.floor(Math.random() * 10)}-${newPhoto.image.name}`.replaceAll(

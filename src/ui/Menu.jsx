@@ -8,7 +8,7 @@ function Menu() {
       <a href="/discover">Przeglądaj</a>
       <a href="/">Prześlij zdjęcie</a>
       <MenuButton></MenuButton>
-      <a href="/">Dołącz</a>
+      <a href="/signup">Dołącz</a>
     </div>
   );
 }
