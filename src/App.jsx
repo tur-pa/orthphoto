@@ -10,6 +10,8 @@ import AppLayout from "./ui/AppLayout";
 import Photo from "./pages/Photo";
 
 import { DataProvider } from "./context/DataContext";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +32,11 @@ function App() {
               <Route path="discover" element={<Discover></Discover>}></Route>
               <Route path="user" element={<User></User>}></Route>
               <Route path="photo/:photoId" element={<Photo></Photo>}></Route>
+              <Route path="photo/login" element={<Login></Login>}></Route>
+              <Route
+                path="photo/register"
+                element={<Register></Register>}
+              ></Route>
             </Route>
             <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
           </Routes>
