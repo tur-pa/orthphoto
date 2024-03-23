@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { FaList, FaFacebookF, FaInstagram } from "react-icons/fa6";
+import { logout } from "../services/apiAuth";
+import { useUser } from "../features/users/useUser";
+import { useLogout } from "../features/users/useLogout";
+import Spinner from "./Spinner";
 
 const styledDropMenu = `absolute top-8 w-[140px] rounded-lg bg-white px-5 py-3 drop-shadow-md`;
 const styledMenuIcon = `relative inline-flex items-center`;
@@ -10,7 +14,8 @@ const styledSocialIcons = `cursor-pointer px-2 text-gray-700 transition-all hove
 
 function MenuButton() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { isAuthenticated } = useUser();
+  const { logout } = useLogout();
   return (
     <div className={styledMenuIcon}>
       <button onClick={() => setIsOpen((isOpen) => !isOpen)}>
@@ -20,7 +25,13 @@ function MenuButton() {
       {isOpen && (
         <div className={styledDropMenu}>
           <ul className={styledMenuItems}>
-            <li>Zaloguj się</li>
+            <li>
+              {isAuthenticated ? (
+                <button onClick={logout}>Wyloguj się</button>
+              ) : (
+                <a href="/login">Zaloguj się </a>
+              )}
+            </li>
             <li>Dołącz</li>
             <li>Zmień język</li>
             <hr className={styledDivideLine}></hr>

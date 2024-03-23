@@ -31,15 +31,6 @@ function Home() {
             { value: "comments_num", label: "Komentowane" },
           ]}
         ></SelectFilter>
-        {/* <select
-          defaultValue="created_at"
-          className="inline-flex cursor-pointer items-center justify-center rounded-lg border border-gray-300 p-2.5 text-lg font-medium focus:border-gray-500"
-        >
-          <option value="created_at">Nowe</option>
-          <option value="rating">Najwyżej oceniane</option>
-          <option value="views">Popularne</option>
-          <option value="commented">Komentowane</option>
-        </select> */}
       </section>
 
       <InfiniteGallery></InfiniteGallery>

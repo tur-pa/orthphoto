@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useInfinitePhotos } from "../features/photos/useInfinitePhotos";
 import Spinner from "./Spinner";
 import { Fragment, useEffect, useRef } from "react";
@@ -10,7 +11,7 @@ const styledGrid = `mt-5 grid grid-cols-3 gap-7 transition-all`;
 function InfiniteGallery() {
   const { isFetching, photos, fetchNextPage, hasNextPage } =
     useInfinitePhotos();
-
+  const navigate = useNavigate();
   const observerTarget = useRef(null);
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -49,7 +50,8 @@ function InfiniteGallery() {
                     src={photo.image}
                     alt={photo.name}
                     key={id}
-                    className={`h-full object-cover transition-all duration-200 hover:scale-[1.05]`}
+                    className={`h-full cursor-pointer object-cover transition-all duration-200 hover:scale-[1.05]`}
+                    onClick={() => navigate(`/photo/${photo.id}`)}
                   ></img>
                 ))}
               </Fragment>

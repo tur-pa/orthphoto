@@ -5,6 +5,8 @@ import Sort from "../ui/Sort";
 import Gallery from "../ui/Gallery";
 import AddPhoto from "../features/photos/AddPhoto";
 import Avatar from "../ui/Avatar";
+import { useProfile } from "../features/users/useProfile";
+import { useUser } from "../features/users/useUser";
 
 const styledUserSection = `flex flex-col items-center justify-center`;
 const styledUsername = `text-2xl font-medium mt-7`;
@@ -12,17 +14,22 @@ const styledStatsSection = `flex text-center [&>div>h4]:text-lg [&>div>h4]:font-
 const styledFilterSection = `container mx-auto my-8 flex justify-end`;
 
 function User() {
+  const { profile } = useProfile();
+  const { user } = useUser();
+
   return (
     <div>
       <section className={styledUserSection}>
         <Avatar></Avatar>
-        <h1 className={styledUsername}>Nazwa użytkownika</h1>
-        <div>
-          <Button type="bgBtn">
-            <FaPencil /> &nbsp; Edytuj profil
-          </Button>
-          <AddPhoto></AddPhoto>
-        </div>
+        <h1 className={styledUsername}>{profile?.username}</h1>
+        {user ? (
+          <div>
+            <Button type="bgBtn">
+              <FaPencil /> &nbsp; Edytuj profil
+            </Button>
+            <AddPhoto></AddPhoto>
+          </div>
+        ) : null}
 
         <div className={styledStatsSection}>
           <div>
