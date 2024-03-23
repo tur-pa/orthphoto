@@ -12,6 +12,7 @@ function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   function onSubmit(data) {
     signup(data);
   }
@@ -56,6 +57,22 @@ function SignUp() {
                     placeholder="name@company.com"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm"
                     {...register("email")}
+                  ></input>
+                </div>
+                <div>
+                  <label
+                    htmlFor="username"
+                    className="mb-2 block text-sm font-medium text-gray-900"
+                  >
+                    Twoja nazwa użytkownika
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="lorem"
+                    className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm"
+                    {...register("username")}
                   ></input>
                 </div>
                 <div>

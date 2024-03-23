@@ -1,12 +1,12 @@
 import supabase from "./supabase";
 
 export async function signup(formData) {
-  const { email, password, first_name, last_name } = formData;
+  const { email, password, username } = formData;
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      data: { first_name, last_name },
+      data: { username },
     },
   });
   if (error) throw new Error(error.message);
@@ -34,15 +34,15 @@ export async function getCurrentUser() {
   return data?.user;
 }
 
-export async function getProfileData() {
-  const { data: profile, error } = await supabase
-    .from("profiles")
-    .select(`id, username`)
-    .single();
+// UPDATING METADATA FROM SUPA
+export async function updateCurrentUser({ username }) {
+  const updateData = { data: { username } };
+
+  const { data, error } = await supabase.auth.updateUser(updateData);
 
   if (error) throw new Error(error.message);
-  console.log(profile);
-  return profile;
+  console.log(data);
+  return data;
 }
 
 export async function logout() {
