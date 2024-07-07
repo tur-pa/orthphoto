@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaFacebook, FaApple, FaGoogle } from "react-icons/fa6";
 import { useLogin } from "../features/users/useLogin";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../features/users/useUser";
 
 function Login() {
+  const navigate = useNavigate();
+  const { login, isLoading } = useLogin();
+  const { user } = useUser();
+
   const [email, setEmail] = useState("test@tlen.pl");
   const [password, setPassword] = useState("123456");
-  const { login, isLoading } = useLogin();
+
+  useEffect(() => {
+    user && navigate(`/user/${user.user_metadata.username}`, { replace: true });
+  }, [user, navigate]);
 
   function handleSubmit(e) {
     e.preventDefault();
