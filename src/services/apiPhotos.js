@@ -22,8 +22,15 @@ export async function getInfinitePhotos({ pageParam = 1, sortBy }) {
   return photos;
 }
 
-export async function getPhotos({ sortBy, filterBy, page }) {
-  let query = supabase.from("photos").select("*", { count: "exact" });
+export async function getPhotos({ sortBy, filterBy, page, username }) {
+  console.log(username);
+  let query =
+    (username &&
+      supabase
+        .from("photos")
+        .select("*", { count: "exact" })
+        .eq("author", username)) ||
+    supabase.from("photos").select("*", { count: "exact" });
 
   // SORT
   if (sortBy.sortField && sortBy.sortDir) {

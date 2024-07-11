@@ -5,6 +5,7 @@ import Sort from "../ui/Sort";
 import Gallery from "../ui/Gallery";
 import AddPhoto from "../features/photos/AddPhoto";
 import Avatar from "../ui/Avatar";
+import PageNotFound from "../pages/PageNotFound";
 import { useProfile } from "../features/users/useProfile";
 import { useUser } from "../features/users/useUser";
 import { useState } from "react";
@@ -35,59 +36,63 @@ function User() {
   }
 
   return (
-    <div>
-      <section className={styledUserSection}>
-        <Avatar></Avatar>
-        <h1 className={styledUsername}>{profile?.username}</h1>
-        {user ? (
-          <div>
-            <Button type="bgBtn" onClick={() => setIsOpenEdit(!isOpenEdit)}>
-              <FaPencil /> &nbsp; Edytuj profil
-            </Button>
-            <AddPhoto></AddPhoto>
-          </div>
-        ) : null}
-        {isOpenEdit ? (
-          <div>
-            <input
-              type="text"
-              placeholder={user.user_metadata.username}
-              onChange={onChange}
-              value={username}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm"
-            ></input>
-            <button onClick={onSubmit}>Change</button>
-          </div>
-        ) : null}
-        <div className={styledStatsSection}>
-          <div>
-            <p>Wyświetlenia</p>
-            <h4>324,5 tysięcy</h4>
-          </div>
-          <div>
-            <p>Polubienia</p>
-            <h4>324,5 tysięcy</h4>
-          </div>
-          <div>
-            <p>Liczba zdjęć</p>
-            <h4>324,5 tysięcy</h4>
-          </div>
+    <>
+      {!profile ? (
+        <PageNotFound></PageNotFound>
+      ) : (
+        <div>
+          <section className={styledUserSection}>
+            <Avatar></Avatar>
+            <h1 className={styledUsername}>{profile?.username}</h1>
+            {user ? (
+              <div>
+                <Button type="bgBtn" onClick={() => setIsOpenEdit(!isOpenEdit)}>
+                  <FaPencil /> &nbsp; Edytuj profil
+                </Button>
+                <AddPhoto></AddPhoto>
+              </div>
+            ) : null}
+            {isOpenEdit ? (
+              <div>
+                <input
+                  type="text"
+                  placeholder={user.user_metadata.username}
+                  onChange={onChange}
+                  value={username}
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm"
+                ></input>
+                <button onClick={onSubmit}>Change</button>
+              </div>
+            ) : null}
+            <div className={styledStatsSection}>
+              <div>
+                <p>Wyświetlenia</p>
+                <h4>324,5 tysięcy</h4>
+              </div>
+              <div>
+                <p>Polubienia</p>
+                <h4>324,5 tysięcy</h4>
+              </div>
+              <div>
+                <p>Liczba zdjęć</p>
+                <h4>324,5 tysięcy</h4>
+              </div>
+            </div>
+          </section>
+          <section className={styledFilterSection}>
+            <Filter
+              options={[
+                { value: "all", label: "Wszystkie" },
+                { value: "popularity", label: "Popularne" },
+                { value: "commented", label: "Komentowane" },
+              ]}
+            ></Filter>
+            <Sort></Sort>
+          </section>
+          <Gallery username={profile?.username}></Gallery>
         </div>
-      </section>
-
-      <section className={styledFilterSection}>
-        <Filter
-          options={[
-            { value: "all", label: "Wszystkie" },
-            { value: "popularity", label: "Popularne" },
-            { value: "commented", label: "Komentowane" },
-          ]}
-        ></Filter>
-        <Sort></Sort>
-      </section>
-
-      <Gallery></Gallery>
-    </div>
+      )}
+    </>
   );
 }
 

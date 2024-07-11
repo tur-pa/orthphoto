@@ -6,11 +6,12 @@ import Spinner from "./Spinner";
 
 const styledGallery = `container mx-auto`;
 
-function Gallery({ filter }) {
-  const { isLoading, photos, count } = usePhotos(filter);
+function Gallery({ filter, username }) {
+  const { isLoading, photos, count } = usePhotos(filter, username);
   const { searchData, isSearching } = useDataContext();
   const navigate = useNavigate();
   const dataToMap = isSearching ? searchData : photos;
+
   return (
     <>
       <div className={styledGallery}>

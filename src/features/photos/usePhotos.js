@@ -3,7 +3,7 @@ import { getPhotos } from "../../services/apiPhotos";
 import { useSearchParams } from "react-router-dom";
 import { GALLERY_SIZE } from "../../utils/constants";
 
-export function usePhotos(filterBy) {
+export function usePhotos(filterBy, username) {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
@@ -19,8 +19,8 @@ export function usePhotos(filterBy) {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["photos", sortBy, filterBy, page],
-    queryFn: () => getPhotos({ sortBy, filterBy, page }),
+    queryKey: ["photos", sortBy, filterBy, page, username],
+    queryFn: () => getPhotos({ sortBy, filterBy, page, username }),
   });
 
   // PRE-FETCHING
