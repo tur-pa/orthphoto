@@ -23,7 +23,6 @@ export async function getInfinitePhotos({ pageParam = 1, sortBy }) {
 }
 
 export async function getPhotos({ sortBy, filterBy, page, username }) {
-  console.log(username);
   let query =
     (username &&
       supabase
@@ -97,6 +96,8 @@ export async function getCountRows() {
   }
   return count;
 }
+
+export async function getViewsPerUser() {}
 
 export async function addPhotoApi(newPhoto) {
   const imageName =

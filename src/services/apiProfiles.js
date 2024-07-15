@@ -11,6 +11,20 @@ export async function getCurrentProfile(userName) {
   return profile;
 }
 
+export async function getProfileStats(userName) {
+  let query = supabase
+    .from("profiles")
+    .select(`photos(views, comments_num, favorite)`)
+    .eq("username", userName)
+    .single();
+
+  const { data: profileStats, error } = await query;
+
+  if (error) throw new Error(error.message);
+
+  return profileStats;
+}
+
 export async function updateCurrentProfile({
   currId,
   username,

@@ -11,6 +11,7 @@ import { useUser } from "../features/users/useUser";
 import { useState } from "react";
 import { useUpdateUser } from "../features/users/useUpdateUser";
 import { useUpdateProfile } from "../features/users/useUpdateProfile";
+import { useProfileStats } from "../features/users/useProfileStats";
 
 const styledUserSection = `flex flex-col items-center justify-center`;
 const styledUsername = `text-2xl font-medium mt-7`;
@@ -21,9 +22,22 @@ function User() {
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const { profile } = useProfile();
   const { user } = useUser();
+  const { profileStats } = useProfileStats();
+
   const [username, setUsername] = useState(profile?.username);
   const { updateUser, isUpdatingUser } = useUpdateUser();
   const { updateProfile, isUpdatingProfile } = useUpdateProfile();
+
+  const { photos: stats } = profileStats || [{}];
+  const viewsStats = stats?.reduce((acc, currView) => acc + currView.views, 0);
+  const favoriteStats = stats?.reduce(
+    (acc, currView) => acc + currView.favorite,
+    0,
+  );
+  const comments_numStats = stats?.reduce(
+    (acc, currView) => acc + currView.comments_num,
+    0,
+  );
 
   function onChange(e) {
     setUsername(e.target.value);
@@ -67,15 +81,27 @@ function User() {
             <div className={styledStatsSection}>
               <div>
                 <p>Wyświetlenia</p>
-                <h4>324,5 tysięcy</h4>
+                <h4>
+                  {viewsStats < 1000
+                    ? viewsStats
+                    : viewsStats / 1000 + ` tysięcy`}
+                </h4>
               </div>
               <div>
                 <p>Polubienia</p>
-                <h4>324,5 tysięcy</h4>
+                <h4>
+                  {favoriteStats < 1000
+                    ? favoriteStats
+                    : favoriteStats / 1000 + ` tysięcy`}
+                </h4>
               </div>
               <div>
                 <p>Liczba zdjęć</p>
-                <h4>324,5 tysięcy</h4>
+                <h4>
+                  {comments_numStats < 1000
+                    ? comments_numStats
+                    : comments_numStats / 1000 + ` tysięcy`}
+                </h4>
               </div>
             </div>
           </section>
